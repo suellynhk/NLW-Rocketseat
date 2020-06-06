@@ -1,0 +1,182 @@
+#page-create-point {
+    width: 90%;
+    max-width: 11000px;
+    
+    /*alinhamento da caixa pelo lado de fora (margem)
+    top/bottom:0 e laterais se ajustam automaticamente*/
+    margin: 0 auto;
+}
+
+#page-create-point header {
+    /*alinha lado a lado na mesma linha */
+    display: flex;
+    /*espaçamento entre o conteúdo de um canto ao outro
+    da tela*/
+    justify-content: space-between;
+    
+    align-items: center;
+    margin-top: 48px;
+}
+
+#page-create-point header a{
+    color: var(--title-color);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+#page-create-point header a span{
+    margin-right: 16px;
+    background-image: url('../assets/arrow-left.svg');
+    display: flex;
+    width: 20px;
+    height: 20px;
+}
+
+form {
+    background-color: white;
+    border-radius: 8px;
+    margin: 80px auto;
+    /*quando colocamos padding + largura da caixa, a caixa tende
+    a aumentar um pouco na largura, por isso colocamos o
+    box-sizing:border-box; para que a largura da caixa continue
+    a mesma (até a borda) e o padding se ajusta dentro desse espaço.
+    Essa config está no main.css para ser aplicada na pag toda*/
+    padding: 64px;
+    max-width: 730px;
+}
+
+form h1 {
+    font-size: 36px;
+}
+
+form fieldset {
+    margin-top: 64px;
+    border: 0;
+}
+
+form legend {
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+form legend h2 {
+    font-size: 24px;
+}
+
+form legend span{
+    color: var(--title-color);
+    font-size: 14px;
+}
+
+form .field {
+    display: flex;
+     /* o display flex é para colocar os itens lado a lado; configurando
+    o flex-direction: column; ele faz como que fiquem organizados um embaixo do outro*/
+    flex-direction: column;
+    margin-bottom: 24px;
+    flex: 1;
+}
+
+form .field-group {
+    display: flex;
+}
+
+/*coloca algumas propriedades para o form select também*/
+form input, form select {
+    background-color: #f0f0f5;
+    border: 0;
+    border-radius: 8px;
+    padding: 16px 24px;
+    font-size: 16px;
+    /*o outline (já vem por padrão) é a linha preta em volta do campo quando selecionado, para o usuário
+    se localizar, é opcional, mas se tirar, é preciso algo ali pra auxiliar a localização do 
+    usuário: outline: none;*/
+}
+
+form select {
+    /* o select perde a configuração padrão dos navegadores (pré-definidos),
+    para poder colocar a configuração que queremos, como são vários navegadores, 
+    algumas opções não se aplicam, por isso colocamos várias */   
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+form label {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+/* configurar o espaçamento entre os .field dentro do .field-group.
+no exemplo, (entre dois campos) ele está configurando o campo do 
+lado direito (+ .field) */
+form .field-group .field + .field {
+    margin-left: 24px;
+}
+
+button {
+    width: 260px;
+    height: 56px;
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    border: 0;
+    margin-top: 40px;
+    /* se aplicar somente o transition ele aplica para tudo,
+    como só queremos que a cor de fundo mude, podemos esfecificar*/
+    transition: background-color 400ms;
+}
+
+form button:hover {
+    background-color: #2fb86e;
+}
+
+.items-grid {
+    display: grid; /*é multidimensional, pode criar linhas e colunas*/
+    grid-template-columns: 1fr 1fr 1fr;  /* 3 colunas de ?px /  ou  
+    1fr- ele já calcula o espaço de 3 colunas autom. e conforme a quantidade de itens, 
+    ele vai organizando, chega na terceira coluna, ele joga os elementos para baixo na 
+    proxima linha.*/
+    gap: 16px; /*propriedade do grid, para espaçamento, funciona como margin mas no grid*/
+}
+
+.items-grid li {
+    background-color: #f5f5f5;
+    list-style: none; /*tirar os bullets da lista*/
+    border:2px solid #f5f5f5;
+    border-radius: 8px;
+    height: 180px;
+    padding: 32px 24px 16px;
+    display: flex; /*alinha os elementos*/
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* como os elementos estão configurados fex column, o espaço é na vertical (y)*/
+    text-align: center;
+    cursor: pointer; /*muda o cursor para mãozinha qndo clicar*/
+}
+
+.items-grid li span {
+    flex: 1; /*preenche o espaço da imagem*/
+    display: flex; /*alinha ao meio*/
+    align-items: center;
+    color: var(--title-color);
+    margin-top: 12px;
+}
+
+.items-grid li.selected { /*não da espaço entre o li e a class pq dá outro significado
+(dentro do li há algum elemento com a class selected, e não é isso), o selected está NO li.*/
+    background: #e1faec;
+    border: 2px solid #34cb79;
+}
+
+/*quando clicamos no elemento, no console (f12) ele pega os "filhos" também, então para isso 
+configuramos os filhos (img e span) para que n sejam clicados*/
+.items-grid li img,
+.items-grid li span {
+    pointer-events: none;
+}

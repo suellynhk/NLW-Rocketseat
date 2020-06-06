@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+     {% set pageId = "page-search-results" %}
+
+   <!-- cuidado com a ordem de referência-->
+    {% block styles %}
+   
+         <link rel="stylesheet" href="/styles/search-results.css">
+   
+    {% endblock styles %}
+   
+
+    {% block title %} 
+
+        <title>Resultados da Pesquisa</title>
+
+    {% endblock title %}
+
+
+    {% block content %}
+        
+        {% include "partials/page-header.html" %}
+
+        <!-- Formulário: identificar os campos e quais partes possui,
+        no nosso exemplo possui 2 campos, um com fomulário e outro com 
+        botões, cada campo sera configurados dentro de um <fieldset></fieldset> -->
+        
+        <main>
+
+            {% if total>0 %}
+
+                <h4><strong>{{ total }} pontos</strong> encontrados</h4>
+                <div class="cards">
+
+                    {% for place in places %}
+
+                        <div class="card">
+                            <img src="{{ place.image }}" alt="{{ place.name }}">
+                            <h2>{{ place.name }}</h2>
+                            <h3>{{ place.items }}</h3>
+                            <p>{{ place.city }}, {{ place.state }} <br> 
+                                {{ place.address }} <br>
+                                {{ place.address2 }}
+                            </p>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% else %}
+                <h4><strong> Nenhum </strong> ponto foi encontrado</h4>
+           
+            {% endif %}
+
+        </main>
+        
+    {% endblock content %}
+
+    
+
+    
